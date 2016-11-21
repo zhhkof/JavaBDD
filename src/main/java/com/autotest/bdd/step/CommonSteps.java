@@ -149,6 +149,8 @@ public class CommonSteps extends StepsSupport {
     @BeforeStories
     @SuppressWarnings("unchecked")
     public void beforeStories() {
+        RemoteWebDriver.open();
+
         // 检查是否处于恢复模式，若是，则恢复上一次运行的上下文
         if ("on".equals(Configuration.getProperty("restore.enabled", "off"))) {
             File restoreFile = new File(Configuration.getProperty("restore.file", "bdd-context"));
@@ -176,7 +178,7 @@ public class CommonSteps extends StepsSupport {
         } catch (IOException e) {
             logger.error("启动HTTP服务失败", e);
         }
-        System.out.println("都准备好了啊");
+        System.out.println("执行到这就是都准备好了呀");
 
         //jira bug 提交代码模块，暂不处理，后续借鉴。
 //        if (("true").equals(Configuration.getProperty("bug.submit"))) {
@@ -259,6 +261,7 @@ public class CommonSteps extends StepsSupport {
     protected org.openqa.selenium.remote.RemoteWebDriver getDriver() {
         return RemoteWebDriver.instance();
     }
+
     @Given("start test")
     public void startTest(){
         System.out.println("start test");
@@ -275,6 +278,7 @@ public class CommonSteps extends StepsSupport {
 //            getDriver().get("about:blank");
 //        }
         System.out.println(Configuration.getProperty("base.url"));
+        System.out.println(getDriver().getClass());
         getDriver().get(Configuration.getProperty("base.url"));
     }
 
