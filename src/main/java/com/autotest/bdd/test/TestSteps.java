@@ -1,4 +1,4 @@
-package com.autotest.bdd;
+package com.autotest.bdd.test;
 
 import org.apache.commons.io.IOUtils;
 import org.jbehave.core.annotations.Given;
@@ -64,5 +64,14 @@ public class TestSteps {
         } finally {
             conn.disconnect();
         }
+    }
+
+    @Given("There is a student")
+    public void initStudent() {
+        System.out.println("sssss");
+    }
+    @Then("he is a student")
+    public void heis() {
+        System.out.println("ssssssssssss");
     }
 }

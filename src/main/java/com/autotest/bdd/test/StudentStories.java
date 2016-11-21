@@ -37,17 +37,22 @@ public StudentStories() {
 }
 
     @Override
-//    protected List<String> storyPaths() {
-//        List<String> aa =new StoryFinder().findPaths("/Users/ZHH/IdeaProjects/JavaBDD/src/main/java/com/autotest/bdd/test/","**/*.story","");
+    protected List<String> storyPaths() {
+//        List<String> aa =new StoryFinder().findPaths("/media/zhh/FileStorage/IdeaProjects/JavaBDD/src/main/java/com/autotest/bdd/test/","**/*.story","");
 //        System.out.println(aa);
 //        List<String> l=new ArrayList<>();
 //        l.add("./tt.story");
 //        return aa;
 //                Arrays.asList("/Users/ZHH/IdeaProjects/JavaBDD/src/main/java/com/autotest/bdd/test/tt.story");
-    protected List<String> storyPaths() {
-        String codeLocation = codeLocationFromClass(this.getClass()).getFile();
-        return new StoryFinder().findPaths(codeLocation, Arrays.asList("**/*.story"),
-                Arrays.asList(""), "file:"+codeLocation);
+//    protected List<String> storyPaths() {
+//        String codeLocation = codeLocationFromClass(this.getClass()).getFile();
+//        return new StoryFinder().findPaths(codeLocation, Arrays.asList("**/*.story"),
+//                Arrays.asList(""), "file:"+codeLocation);
+        System.out.println(codeLocationFromClass(this.getClass()).getFile());
+        List<String> stories = new StoryFinder().findPaths(
+                "/media/zhh/FileStorage/IdeaProjects/JavaBDD/src/main/java/com/autotest/bdd/test/", "**/*.story", "**/excluded*.story");
+        System.out.println(stories);
+        return stories;
     }
 
 }

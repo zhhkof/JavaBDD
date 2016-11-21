@@ -6,5 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 
 Scenario: scenario description
-Given I start test url
-When send tcp request 123 to www.baidu.com
+Given start test
+When open browser
+And wait 5
+And close browser

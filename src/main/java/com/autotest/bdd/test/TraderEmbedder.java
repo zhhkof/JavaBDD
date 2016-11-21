@@ -1,4 +1,4 @@
-package com.autotest.bdd;
+package com.autotest.bdd.test;
 
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
