@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JBehave 报告</title>
+<title>JBehave Report</title>
 <style type="text/css" media="all">
 #footer {
 	width: 100%;
@@ -404,7 +404,7 @@ pre.failure {
 <body>
 <div class="reports">
 
-<h2>故事报告</h2>
+<h2>Stories执行报告</h2>
 
 <table>
 <colgroup span="1" class="stories"></colgroup>
@@ -433,10 +433,10 @@ pre.failure {
     <th>耗时(hh:mm:ss.SSS)</th>
     <th>详细</th>
 </tr>
-<#assign reportNames = reportsTable.getReportNames()>
+<#assign reportNames = reports.getReportNames()>
 <#assign totalReports = reportNames.size() - 1>
 <#list reportNames as name>
-<#assign report = reportsTable.getReport(name)>
+<#assign report = reports.getReport(name)>
 <#if name != "Totals">
 <tr>
 <#assign stats = report.getStats()>
@@ -525,7 +525,7 @@ pre.failure {
 </#list>
 <tr class="totals">
 <td>${totalReports}</td>
-<#assign stats = reportsTable.getReport("Totals").getStats()>
+<#assign stats = reports.getReport("Totals").getStats()>
 <!--
 <td>
 <@renderStat stats "notAllowed" "failed"/>
