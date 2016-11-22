@@ -149,7 +149,7 @@ public class CommonSteps extends StepsSupport {
     @BeforeStories
     @SuppressWarnings("unchecked")
     public void beforeStories() {
-        RemoteWebDriver.open();
+
 
         // 检查是否处于恢复模式，若是，则恢复上一次运行的上下文
         if ("on".equals(Configuration.getProperty("restore.enabled", "off"))) {
@@ -270,6 +270,7 @@ public class CommonSteps extends StepsSupport {
 
     @When("open browser")
     public void openBrowser() {
+        RemoteWebDriver.open();
         String browser = Configuration.getProperty("browser", "firefox");
         if ("chrome".equals(browser)) {
             getDriver().get("chrome://downloads/");
@@ -285,7 +286,7 @@ public class CommonSteps extends StepsSupport {
     //    @When("关闭浏览器")
     @When("close browser")
     public void closeBrowser() {
-        RemoteWebDriver.quit();
+        getDriver().quit();
     }
 //
 //    @Then("在$content中，应该包含$sub")

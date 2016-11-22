@@ -38,14 +38,14 @@ public class ViewGenerator extends FreemarkerViewGenerator {
         super.generateReportsView(outputDirectory, formats, viewProperties);
         String outputName = "view/" + Configuration.getStoryName() + ".xml";
         String reportsTemplate = "ftl/junit-reports.ftl";
-        
         Map<String, Object> dataModel = new HashMap<String, Object>();
+
+        //ReportsTable该静态方法在jbehave里被废弃，新增Reports
 //        dataModel.put("reportsTable", new ReportsTable(this.<List<Report>>get("reports"), this.<StoryNameResolver>get("nameResolver")));//jar包内变更
-        dataModel.put("reportsTable", new Reports(this.<List<Report>>get("reports"), this.<StoryNameResolver>get("nameResolver")));
+        dataModel.put("reports", new Reports((this.<Reports>get("reports")).getReports(), this.<StoryNameResolver>get("nameResolver")));
         dataModel.put("date", new Date());
         dataModel.put("timeFormatter", new TimeFormatter());
         dataModel.put("storyName", Configuration.getStoryName());
-        
         try {
             File file = new File(outputDirectory, outputName);
             file.getParentFile().mkdirs();

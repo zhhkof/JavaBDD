@@ -12,12 +12,12 @@
 </#if>
 </#macro>
 <?xml version="1.0" encoding="UTF-8" ?>
-<#assign reportNames = reportsTable.getReportNames()>
+<#assign reportNames = reports.getReportNames()>
 <#assign totalReports = reportNames.size() - 3>
-<#assign stats = reportsTable.getReport("Totals").getStats()>
+<#assign stats = reports.getReport("Totals").getStats()>
 <testsuite errors="<@renderStat stats "scenariosFailed"/>" tests="${totalReports}" time="<@renderMillis stats "duration"/>" failures="<@renderStat stats "scenariosFailed"/>" name="${storyName}">
 <#list reportNames as name>
-<#assign report = reportsTable.getReport(name)>
+<#assign report = reports.getReport(name)>
 <#if name != "Totals">
 <#assign stats = report.getStats()>
 <#assign stepsFailed = stats.get("stepsFailed")!0>

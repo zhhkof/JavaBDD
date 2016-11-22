@@ -8,5 +8,5 @@ So that I can achieve a business goal
 Scenario: scenario description
 Given start test
 When open browser
-And wait 5
+And wait 2
 And close browser
