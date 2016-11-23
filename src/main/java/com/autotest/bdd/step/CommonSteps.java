@@ -49,11 +49,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
 import org.jbehave.core.ConfigurableEmbedder;
-import org.jbehave.core.annotations.AfterStories;
-import org.jbehave.core.annotations.BeforeStories;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 import org.junit.Assert;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -115,8 +111,8 @@ public class CommonSteps extends StepsSupport {
         } finally {
             IOUtils.closeQuietly(out);
         }
-        RemoteWebDriver.quit();
         // 停止测试辅助用HTTP服务
+        RemoteWebDriver.quit();
         HttpServer.stop();
     }
 
@@ -264,21 +260,28 @@ public class CommonSteps extends StepsSupport {
     @Given("start test")
     public void startTest() throws IOException {
         System.out.println("start test");
-        getDriver().get("about:blank");
+        String browser = Configuration.getProperty("browser", "firefox");
+        if ("chrome".equals(browser)) {
+            getDriver().get("chrome://downloads/");
+        } else {
+            getDriver().get("about:blank");
+        }
+        getDriver().get(Configuration.getProperty("base.url"));
     }
 
 
-    @When("open web $url")
+    @When("open webpage $url")
     public void openBrowser(String url) {
         getDriver().get(url);
     }
 
+
     //    @When("关闭浏览器")
-    @When("close browser")
+    @When("close browser")//不建议使用，关了再看有实例化和session的问题，建议restart。
     public void closeBrowser() {
         getDriver().quit();
     }
-//
+
 //    @Then("在$content中，应该包含$sub")
 //    public void contains(String content, String sub) {
 //        assertTrue(content.contains(sub));
@@ -488,10 +491,10 @@ public class CommonSteps extends StepsSupport {
 //        example.put(content, text);
 //    }
 //
-//    @When("重启浏览器")
-//    public void restartBrowser() {
-//        RemoteWebDriver.restart();
-//    }
+    @When("restart brower")
+    public void restartBrowser() {
+        RemoteWebDriver.restart();
+    }
 
     //    @When("等候$n秒")
     @When("wait $n")
