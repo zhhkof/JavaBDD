@@ -115,7 +115,7 @@ public class CommonSteps extends StepsSupport {
         } finally {
             IOUtils.closeQuietly(out);
         }
-
+        RemoteWebDriver.quit();
         // 停止测试辅助用HTTP服务
         HttpServer.stop();
     }
@@ -149,8 +149,7 @@ public class CommonSteps extends StepsSupport {
     @BeforeStories
     @SuppressWarnings("unchecked")
     public void beforeStories() {
-
-
+        RemoteWebDriver.open();
         // 检查是否处于恢复模式，若是，则恢复上一次运行的上下文
         if ("on".equals(Configuration.getProperty("restore.enabled", "off"))) {
             File restoreFile = new File(Configuration.getProperty("restore.file", "bdd-context"));
@@ -263,24 +262,15 @@ public class CommonSteps extends StepsSupport {
     }
 
     @Given("start test")
-    public void startTest(){
+    public void startTest() throws IOException {
         System.out.println("start test");
+        getDriver().get("about:blank");
     }
 
 
-    @When("open browser")
-    public void openBrowser() {
-        RemoteWebDriver.open();
-        String browser = Configuration.getProperty("browser", "firefox");
-        if ("chrome".equals(browser)) {
-            getDriver().get("chrome://downloads/");
-        }
-//        else {
-//            getDriver().get("about:blank");
-//        }
-        System.out.println(Configuration.getProperty("base.url"));
-        System.out.println(getDriver().getClass());
-        getDriver().get(Configuration.getProperty("base.url"));
+    @When("open web $url")
+    public void openBrowser(String url) {
+        getDriver().get(url);
     }
 
     //    @When("关闭浏览器")

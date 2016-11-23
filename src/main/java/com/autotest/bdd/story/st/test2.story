@@ -7,6 +7,10 @@ So that I can achieve a business goal
 
 Scenario: scenario description
 Given start test
-When open browser
-And wait 3
-And close browser
+When open web <url>
+And wait <a>
+
+Examples:
+|a|url|
+|3|http://www.baidu.com|
+|4|http://www.sina.com.cn|
