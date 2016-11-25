@@ -66,8 +66,8 @@ public class RunStories extends JUnitStories {
                 )
                 // 根据当前系统/子系统，动态路由步骤
                 .useStepCollector(new DynamicStepCollector(keywords))
-                // 使用修正后的RegexStoryParser，jbehave自带类对中文故事解析有BUG
-                .useStoryParser(new RegexStoryParser(keywords))//暂时使用默认
+                // 使用支持story中Examples读取配置和随机数的解析方法
+                .useStoryParser(new RegexStoryParserEx(keywords))
                 // 故事从STORY_HOME目录下装载，文件编码固定为UTF-8
                 .useStoryLoader(new LoadFromRelativeFile(new File(Configuration.getStoryHome()).toURI().toURL()) {
                     protected String loadContent(String path) {

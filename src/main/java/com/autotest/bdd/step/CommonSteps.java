@@ -501,7 +501,12 @@ public class CommonSteps extends StepsSupport {
     public void sleep(long n) throws InterruptedException {
         Thread.sleep(n * 1000);
     }
-//
+
+    @When("控制台打印 $value")
+    public void printConfig(String value){
+        System.out.println(value);
+    }
+
 //    @When(value = "等候$n毫秒", priority = 1)
 //    public void sleepMillis(long n) throws InterruptedException {
 //        Thread.sleep(n);

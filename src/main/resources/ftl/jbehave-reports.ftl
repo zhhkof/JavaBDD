@@ -12,7 +12,7 @@
         #footer {
             width: 100%;
             background: #fff url(../images/background-footer.png) repeat;
-            color: #fff;
+            color: #555;
             border: 1px solid;
             padding: 5px 0 5px 0;
             margin-top: 50px;
