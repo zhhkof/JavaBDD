@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -25,12 +24,10 @@ import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.embedder.UnmodifiableEmbedderControls;
-import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.core.io.InvalidStoryResource;
 import org.jbehave.core.io.LoadFromRelativeFile;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.parsers.RegexStoryParser;
 import org.jbehave.core.reporters.ConsoleOutput;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.reporters.StoryReporterBuilder.Format;
@@ -87,7 +84,7 @@ public class RunStories extends JUnitStories {
                                 .withKeywords(keywords)
                                 .withFailureTrace(true)
                 )
-                .useViewGenerator(new ViewGenerator())
+                .useViewGenerator(new ViewGeneratorEx())
         );
 
         /** 初始化所有Step实例，这将：

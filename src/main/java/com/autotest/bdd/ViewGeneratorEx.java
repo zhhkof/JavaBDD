@@ -14,13 +14,13 @@ import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ViewGenerator extends FreemarkerViewGenerator {
+public class ViewGeneratorEx extends FreemarkerViewGenerator {
     
-    private static final Logger logger = Logger.getLogger(ViewGenerator.class);
+    private static final Logger logger = Logger.getLogger(ViewGeneratorEx.class);
     
     private Map<String,Field> fields = new HashMap<String,Field>();
-    
-    public ViewGenerator() throws Exception {
+
+    public ViewGeneratorEx() throws Exception {
         for (Class<?> clazz : new Class[] { TemplateableViewGenerator.class, FreemarkerProcessor.class }) {
             for (Field field : clazz.getDeclaredFields()) {
                 fields.put(field.getName(), field);
@@ -32,7 +32,8 @@ public class ViewGenerator extends FreemarkerViewGenerator {
         templateLoadingFromField.setAccessible(true);
         templateLoadingFromField.set(get("processor"), this.getClass());
     }
-    
+
+
     @Override
     public void generateReportsView(File outputDirectory, List<String> formats, Properties viewProperties) {
         super.generateReportsView(outputDirectory, formats, viewProperties);
