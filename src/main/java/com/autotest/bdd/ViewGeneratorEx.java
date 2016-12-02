@@ -33,6 +33,22 @@ public class ViewGeneratorEx extends FreemarkerViewGenerator {
         templateLoadingFromField.set(get("processor"), this.getClass());
     }
 
+//    @Override
+//    public Properties defaultViewProperties() {
+//        Properties properties = new Properties(super.defaultViewProperties());
+//        properties.setProperty("encoding", "UTF-8");
+////        properties.setProperty("decorateNonHtml", "true");
+////        properties.setProperty("defaultFormats", "stats");
+////        properties.setProperty("reportsViewType", TemplateableViewGenerator.Reports.ViewType.LIST.name());
+////        properties.setProperty("viewDirectory", "view");
+//        properties.setProperty("views", "ftl/jbehave-views.ftl");
+//        properties.setProperty("maps", "ftl/jbehave-maps.ftl");
+//        properties.setProperty("navigator", "ftl/jbehave-navigator.ftl");
+//        properties.setProperty("reports", "ftl/jbehave-reports.ftl");
+//        properties.setProperty("decorated", "ftl/jbehave-report-decorated.ftl");
+//        properties.setProperty("nonDecorated", "ftl/jbehave-report-non-decorated.ftl");
+//        return properties;
+//    }
 
     @Override
     public void generateReportsView(File outputDirectory, List<String> formats, Properties viewProperties) {

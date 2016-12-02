@@ -145,7 +145,7 @@ public class CommonSteps extends StepsSupport {
     @BeforeStories
     @SuppressWarnings("unchecked")
     public void beforeStories() {
-        RemoteWebDriver.open();
+//        RemoteWebDriver.open();
         // 检查是否处于恢复模式，若是，则恢复上一次运行的上下文
         if ("on".equals(Configuration.getProperty("restore.enabled", "off"))) {
             File restoreFile = new File(Configuration.getProperty("restore.file", "bdd-context"));

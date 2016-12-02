@@ -10,12 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.io.IOUtils;
 import org.jbehave.core.ConfigurableEmbedder;
@@ -29,8 +24,10 @@ import org.jbehave.core.io.LoadFromRelativeFile;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.ConsoleOutput;
+import org.jbehave.core.reporters.FreemarkerViewGenerator;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.reporters.StoryReporterBuilder.Format;
+import org.jbehave.core.reporters.TemplateableViewGenerator;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.ParameterControls;
 import org.junit.runner.RunWith;
@@ -48,7 +45,7 @@ public class RunStories extends JUnitStories {
 
         /** 配置 */
 //        Keywords keywords = new LocalizedKeywords(Locale.SIMPLIFIED_CHINESE, "i18n/keywords", OurStories.class.getClassLoader());
-        Keywords keywords=new Keywords();//暂不本地汉化
+        Keywords keywords = new Keywords();//暂不本地汉化
         useConfiguration(new MostUsefulConfiguration()
                 // 执行过程输出到控制台
                 .useDefaultStoryReporter(new ConsoleOutput(keywords))
@@ -83,8 +80,11 @@ public class RunStories extends JUnitStories {
                                 .withFormats(Format.STATS, Format.HTML)
                                 .withKeywords(keywords)
                                 .withFailureTrace(true)
+                                //加载view资源，兼容jbehave-maven-plugin执行和IDE执行两种方式的report一致。
+//                                .withViewResources(ViewProperties())//用configuration.setProperty代替，114行
                 )
                 .useViewGenerator(new ViewGeneratorEx())
+
         );
 
         /** 初始化所有Step实例，这将：
@@ -95,7 +95,7 @@ public class RunStories extends JUnitStories {
          *  注意：Step实例是单例的，即所有系统和子系统共享唯一的Step实例
          */
         Collection<String> steps = Configuration.getSteps();
-        Map<String,Object> stepInstances = new HashMap<String,Object>();
+        Map<String, Object> stepInstances = new HashMap<String, Object>();
 
         Reflections reflections = new Reflections("com.autotest");
         for (Class<?> clazz : reflections.getSubTypesOf(StepsSupport.class)) {
@@ -113,12 +113,29 @@ public class RunStories extends JUnitStories {
         }
 
         org.jbehave.core.configuration.Configuration configuration = configuration();
+        configuration.storyReporterBuilder().viewResources().setProperty("reports", "ftl/jbehave-reports.ftl");
+        configuration.storyReporterBuilder().viewResources().setProperty("encoding", "UTF-8");
 
         Environment.setConfiguration(configuration);
         Environment.setStepInstances(stepInstances);
-
         useStepsFactory(new InstanceStepsFactory(configuration, stepInstances.values().toArray()));
     }
+
+//    public Properties ViewProperties() {
+//        Properties properties = new Properties();
+//        properties.setProperty("encoding", "UTF-8");
+//        properties.setProperty("decorateNonHtml", "true");
+//        properties.setProperty("defaultFormats", "stats");
+//        properties.setProperty("reportsViewType", TemplateableViewGenerator.Reports.ViewType.LIST.name());
+//        properties.setProperty("viewDirectory", "view");
+//        properties.setProperty("views", "ftl/jbehave-views.ftl");
+//        properties.setProperty("maps", "ftl/jbehave-maps.ftl");
+//        properties.setProperty("navigator", "ftl/jbehave-navigator.ftl");
+//        properties.setProperty("reports", "ftl/jbehave-reports.ftl");
+//        properties.setProperty("decorated", "ftl/jbehave-report-decorated.ftl");
+//        properties.setProperty("nonDecorated", "ftl/jbehave-report-non-decorated.ftl");
+//        return properties;
+//    }
 
     public void useEmbedder(Embedder embedder) {
         super.useEmbedder(embedder);

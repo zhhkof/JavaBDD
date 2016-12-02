@@ -440,7 +440,7 @@
     <!--<th>Excluded</th>-->
     <!--<th>Total</th>-->
     <!--<th>Successful</th>-->
-    <th>NOT PERFORMED</th>
+    <th>Not Performed</th>
     <!--<th>Failed</th>-->
     <!--<th>Not Performed</th>-->
     <th>Ignorable</th>
@@ -490,22 +490,23 @@
 <td>
 <@renderStat stats "scenariosNotAllowed" "failed"/>
 </td>
+--><!--
+<td>
+<@renderStat stats "givenStoryScenarios"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosSuccessful" "successful"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosPending" "pending"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosFailed" "failed"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosNotAllowed" "failed"/>
+</td>
 -->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenarios"/> -->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosSuccessful" "successful"/> -->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosPending" "pending"/> -->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosFailed" "failed"/>-->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosNotAllowed" "failed"/>-->
-<#--</td>-->
 <td>
 <@renderStat stats "steps" />
 </td>
@@ -559,22 +560,23 @@
 <td>
 <@renderStat stats "scenariosNotAllowed" "failed"/>
 </td>
+--><!--
+<td>
+<@renderStat stats "givenStoryScenarios"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosSuccessful" "successful"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosPending" "pending"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosFailed" "failed"/>
+</td>
+<td>
+<@renderStat stats "givenStoryScenariosNotAllowed" "failed"/>
+</td>
 -->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenarios"/> -->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosSuccessful" "successful"/> -->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosPending" "pending"/> -->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosFailed" "failed"/>-->
-<#--</td>-->
-<#--<td>-->
-<#--<@renderStat stats "givenStoryScenariosNotAllowed" "failed"/>-->
-<#--</td>-->
 <td>
 <@renderStat stats "steps" />
 </td>
