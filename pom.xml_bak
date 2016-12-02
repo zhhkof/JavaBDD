@@ -203,8 +203,8 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
-                            <overwriteReleases>false</overwriteReleases>
-                            <overwriteSnapshots>true</overwriteSnapshots>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.jbehave.site</groupId>
@@ -215,7 +215,7 @@
                                         ${project.build.directory}/jbehave/view
                                     </outputDirectory>
                                     <includes>
-                                        **\/*.css
+                                        **\/*.css,images/background-footer.png
                                     </includes>
                                 </artifactItem>
                             </artifactItems>
@@ -228,8 +228,10 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
-                            <overwriteReleases>false</overwriteReleases>
-                            <overwriteSnapshots>true</overwriteSnapshots>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <!--<overwriteReleases>false</overwriteReleases>-->
+                            <!--<overwriteSnapshots>true</overwriteSnapshots>-->
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.jbehave</groupId>
