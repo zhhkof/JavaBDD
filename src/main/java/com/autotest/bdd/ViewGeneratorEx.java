@@ -44,7 +44,7 @@ public class ViewGeneratorEx extends FreemarkerViewGenerator {
 //        properties.setProperty("views", "ftl/jbehave-views.ftl");
 //        properties.setProperty("maps", "ftl/jbehave-maps.ftl");
 //        properties.setProperty("navigator", "ftl/jbehave-navigator.ftl");
-//        properties.setProperty("reports", "ftl/jbehave-reports.ftl");
+//        properties.setProperty("reports", "ftl/jbehave-reports-modify.ftl");
 //        properties.setProperty("decorated", "ftl/jbehave-report-decorated.ftl");
 //        properties.setProperty("nonDecorated", "ftl/jbehave-report-non-decorated.ftl");
 //        return properties;

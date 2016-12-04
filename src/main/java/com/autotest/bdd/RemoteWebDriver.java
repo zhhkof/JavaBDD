@@ -36,7 +36,7 @@ public class RemoteWebDriver {
         if (driver != null) return;
         
         if (_browser == null) {
-            _browser = Configuration.getProperty("browser", "firefox");
+            _browser = Configuration.getProperty("browser", "chrome"); //默认chrome
         }
         browser = _browser;
         

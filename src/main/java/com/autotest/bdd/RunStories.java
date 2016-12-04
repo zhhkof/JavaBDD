@@ -24,10 +24,8 @@ import org.jbehave.core.io.LoadFromRelativeFile;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.ConsoleOutput;
-import org.jbehave.core.reporters.FreemarkerViewGenerator;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.reporters.StoryReporterBuilder.Format;
-import org.jbehave.core.reporters.TemplateableViewGenerator;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.ParameterControls;
 import org.junit.runner.RunWith;
@@ -113,7 +111,7 @@ public class RunStories extends JUnitStories {
         }
 
         org.jbehave.core.configuration.Configuration configuration = configuration();
-        configuration.storyReporterBuilder().viewResources().setProperty("reports", "ftl/jbehave-reports.ftl");
+        configuration.storyReporterBuilder().viewResources().setProperty("reports", "ftl/jbehave-reports-modify.ftl");
         configuration.storyReporterBuilder().viewResources().setProperty("encoding", "UTF-8");
 
         Environment.setConfiguration(configuration);
@@ -131,7 +129,7 @@ public class RunStories extends JUnitStories {
 //        properties.setProperty("views", "ftl/jbehave-views.ftl");
 //        properties.setProperty("maps", "ftl/jbehave-maps.ftl");
 //        properties.setProperty("navigator", "ftl/jbehave-navigator.ftl");
-//        properties.setProperty("reports", "ftl/jbehave-reports.ftl");
+//        properties.setProperty("reports", "ftl/jbehave-reports-modify.ftl");
 //        properties.setProperty("decorated", "ftl/jbehave-report-decorated.ftl");
 //        properties.setProperty("nonDecorated", "ftl/jbehave-report-non-decorated.ftl");
 //        return properties;

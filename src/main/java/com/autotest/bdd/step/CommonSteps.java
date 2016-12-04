@@ -41,6 +41,7 @@ import javax.xml.xpath.XPathFactory;
 import com.autotest.bdd.*;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -97,55 +98,13 @@ public class CommonSteps extends StepsSupport {
         super(embedder);
     }
 
-    @AfterStories
-    public void afterStories() {
-        // 保存本次运行的上下文
-        File restoreFile = new File(Configuration.getProperty("restore.file", "bdd-context"));
-        ObjectOutputStream out = null;
-        try {
-            out = new ObjectOutputStream(new FileOutputStream(restoreFile));
-            out.writeObject(ExpressionEngine.context);//随机数保存
-            out.writeObject(marks);
-        } catch (IOException e) {
-            logger.error("保存运行的上下文失败", e);
-        } finally {
-            IOUtils.closeQuietly(out);
-        }
-        // 停止测试辅助用HTTP服务
-        RemoteWebDriver.quit();
-        HttpServer.stop();
-    }
-
-//    @Then(value = "在$content中，XPath:$xpath的值应该是$value", priority = 1)
-//    public void assertByXPath(String content, String xpath, String value) throws ParserConfigurationException, SAXException, IOException, XPathException {
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(true);
-//        DocumentBuilder builder = factory.newDocumentBuilder();
-//        Document document = builder.parse(new ByteArrayInputStream(Environment.getCurrentExample().get(content).getBytes("UTF-8")));
-//
-//        XPathFactory xpathFactory = XPathFactory.newInstance();
-//        XPath xpath0 = xpathFactory.newXPath();
-//        xpath0.setNamespaceContext(new UniversalNamespaceResolver(document));
-//        XPathExpression expression = xpath0.compile(xpath);
-//
-//        String result = (String) expression.evaluate(document, XPathConstants.STRING);
-//        assertValue(value, result);
-//    }
-
-//    @Then(value = "- $step", priority = Integer.MAX_VALUE)
-//    public void assertInContext(String step) {
-//        try {
-//            Environment.setInContext(true);
-//            then(step);
-//        } finally {
-//            Environment.setInContext(false);
-//        }
-//    }
-
     @BeforeStories
     @SuppressWarnings("unchecked")
     public void beforeStories() {
-//        RemoteWebDriver.open();
+        String browser = Configuration.getProperty("browser", "");
+        if (!browser.equals("")) {
+            RemoteWebDriver.open();
+        }
         // 检查是否处于恢复模式，若是，则恢复上一次运行的上下文
         if ("on".equals(Configuration.getProperty("restore.enabled", "off"))) {
             File restoreFile = new File(Configuration.getProperty("restore.file", "bdd-context"));
@@ -218,6 +177,52 @@ public class CommonSteps extends StepsSupport {
 //        }
     }
 
+    @AfterStories
+    public void afterStories() {
+        // 保存本次运行的上下文
+        File restoreFile = new File(Configuration.getProperty("restore.file", "bdd-context"));
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(new FileOutputStream(restoreFile));
+            out.writeObject(ExpressionEngine.context);//随机数保存
+            out.writeObject(marks);
+        } catch (IOException e) {
+            logger.error("保存运行的上下文失败", e);
+        } finally {
+            IOUtils.closeQuietly(out);
+        }
+        // 停止测试辅助用HTTP服务
+        RemoteWebDriver.quit();
+        HttpServer.stop();
+    }
+
+//    @Then(value = "在$content中，XPath:$xpath的值应该是$value", priority = 1)
+//    public void assertByXPath(String content, String xpath, String value) throws ParserConfigurationException, SAXException, IOException, XPathException {
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(true);
+//        DocumentBuilder builder = factory.newDocumentBuilder();
+//        Document document = builder.parse(new ByteArrayInputStream(Environment.getCurrentExample().get(content).getBytes("UTF-8")));
+//
+//        XPathFactory xpathFactory = XPathFactory.newInstance();
+//        XPath xpath0 = xpathFactory.newXPath();
+//        xpath0.setNamespaceContext(new UniversalNamespaceResolver(document));
+//        XPathExpression expression = xpath0.compile(xpath);
+//
+//        String result = (String) expression.evaluate(document, XPathConstants.STRING);
+//        assertValue(value, result);
+//    }
+
+//    @Then(value = "- $step", priority = Integer.MAX_VALUE)
+//    public void assertInContext(String step) {
+//        try {
+//            Environment.setInContext(true);
+//            then(step);
+//        } finally {
+//            Environment.setInContext(false);
+//        }
+//    }
+
+
     //    @Given(value = "$address可访问", priority = -1)
     @Given(value = "$address can be accessed", priority = -1)
     public void checkConnection(String address) {
@@ -282,7 +287,7 @@ public class CommonSteps extends StepsSupport {
         getDriver().quit();
     }
 
-//    @Then("在$content中，应该包含$sub")
+    //    @Then("在$content中，应该包含$sub")
 //    public void contains(String content, String sub) {
 //        assertTrue(content.contains(sub));
 //    }
@@ -503,7 +508,7 @@ public class CommonSteps extends StepsSupport {
     }
 
     @When("控制台打印 $value")
-    public void printConfig(String value){
+    public void printConfig(String value) {
         System.out.println(value);
     }
 
