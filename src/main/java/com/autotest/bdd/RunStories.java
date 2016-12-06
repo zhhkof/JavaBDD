@@ -112,7 +112,7 @@ public class RunStories extends JUnitStories {
         }
 
         org.jbehave.core.configuration.Configuration configuration = configuration();
-        configuration.storyReporterBuilder().viewResources().setProperty("reports", "ftl/jbehave-reports-modify.ftl");
+//        configuration.storyReporterBuilder().viewResources().setProperty("reports", "ftl/jbehave-reports-modify.ftl");
         configuration.storyReporterBuilder().viewResources().setProperty("encoding", "UTF-8");
 
         Environment.setConfiguration(configuration);
