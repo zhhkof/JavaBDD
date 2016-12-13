@@ -6,6 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 
 Scenario: 简单web打开测试
+
 Given start test
 When open webpage <url>
 And wait <a>
